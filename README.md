@@ -27,8 +27,8 @@ interface should provide reliable way to see *missed (unpaired)* elements, have 
 ## Design
 
 | Mock data |
--------------
-| **Elements:** Water, Earth, Fire, Mud, Steam, Lava, Air | 
+| --------- |
+| **Elements:** Water, Earth, Fire, Mud, Steam, Lava, Air |
 
 1. All elements
 2. Missed elements (without pair and excluding BASE and FINAL elements)  
