@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemist</title>
+    <style>
+        :root {
+            --unit: 10px;
+            --border: 1px solid #000;
+            --gap: calc(2 * var(--unit));
+            --columns: 3;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: Consolas;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: 1fr auto;
+        }
+
+        .lists {
+            display: grid;
+            overflow: hidden;
+            grid-template: auto / repeat(var(--columns), minmax(auto, 1fr));
+            align-content: flex-start;
+            align-items: flex-start;
+            gap: var(--gap);
+            padding: var(--gap);
+        }
+
+        .lists details:nth-child(-n + 2) {
+            grid-column: span var(--columns);
+        }
+
+        .lists details {
+            border: var(--border);
+            overflow-y: hidden;
+        }
+
+        .lists details[open] {
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .lists summary {
+            padding: var(--unit) var(--gap);
+            border-bottom: var(--border);
+            margin-bottom: -1px;
+            cursor: pointer;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+        }
+
+        .record {
+            padding: var(--unit) var(--gap);
+        }
+
+        .record:hover { 
+            background-color: #00000022;
+        }
+
+        .record-description {
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding: var(--gap);
+            margin-top: auto;
+            border-top: var(--border);
+            gap: var(--gap);
+        }
+
+        .controls select, input[type="button"] {
+            width: 50px;
+            flex-shrink: 0;
+        }
+
+        .controls .groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+            gap: var(--gap);
+        }
+
+        .controls .groups .input-group {
+            display: flex;
+            gap: var(--gap);
+        }
+
+        .controls .groups .input-group input[type=text] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="lists" class="lists">
+        <details>
+            <summary>All</summary>
+            <div id="list-all"></div>
+        </details>
+        <details>
+            <summary>Used</summary>
+            <div id="list-used"></div>
+        </details>
+        <details open>
+            <summary>Base</summary>
+            <div id="list-base"></div>
+        </details>
+        <details open>
+            <summary>Missed</summary>
+            <div id="list-missed"></div>
+        </details>
+        <details open>
+            <summary>Final</summary>
+            <div id="list-final"></div>
+        </details>
+    </div>
+    <div class="controls">
+        <div class="groups">
+            <div class="input-group">
+                <input id="elem1" type="text" />
+            </div>
+            <div class="input-group">
+                <span>+</span> 
+                <input id="elem2" type="text" />
+            </div> 
+            <div class="input-group">
+                <span>=</span> 
+                <input id="res" type="text" /> 
+            </div>
+        </div>
+        <input id="add" type="button" value="Add" />
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
