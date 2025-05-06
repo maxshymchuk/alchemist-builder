@@ -24,6 +24,8 @@
             --bg-hover: #f3f3f3;
 
             --fs: 14px;
+            --fs-small: 11px;
+            --fs-big: 18px;
         }
 
         * {
@@ -113,7 +115,7 @@
         }
 
         .record-description {
-            font-size: 12px;
+            font-size: var(--fs-small);
             font-weight: 300;
         }
 
@@ -130,19 +132,27 @@
         footer {
             display: grid;
             grid-template-columns: repeat(3, minmax(100px, auto) min-content);
-            gap: var(--gap);
+            gap: var(--unit) var(--gap);
             align-items: center;
             padding: var(--gap);
             margin-top: auto;
             border-top: var(--border-width) var(--border-style) var(--border-color);
             font-weight: 600;
-            font-size: 1.5em;
+            font-size: var(--fs-big);
+        }
+
+        footer .error {
+            grid-column: span 6;
+            color: red;
+            font-weight: 300;
+            font-size: var(--fs-small);
         }
     </style>
 </head>
 <body>
     <header>
-        <input id="export" type="button" value="Export" />
+        <input id="import" type="button" value="Import" disabled />
+        <input id="export" type="button" value="Export" disabled />
     </header>
     <main id="lists">
         <details>

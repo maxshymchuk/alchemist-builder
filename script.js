@@ -147,10 +147,10 @@ const list = new ElementCollection([
   new BaseElement('fire'),
   new BaseElement('air'),
   new BaseElement('earth'),
-  //   ...arr,
+  // ...arr,
 ]);
 
-const listsDom = document.getElementById('lists');
+const main = document.querySelector('main');
 const listAllDom = document.getElementById('list-all');
 const listUsedDom = document.getElementById('list-used');
 const listBaseDom = document.getElementById('list-base');
@@ -161,6 +161,22 @@ const inputElem1 = document.getElementById('elem1');
 const inputElem2 = document.getElementById('elem2');
 const inputResult = document.getElementById('res');
 const buttonAdd = document.getElementById('add');
+
+function error(message) {
+  const errorDom = document.querySelector('.error');
+  if (!message) {
+    errorDom?.remove();
+    return;
+  }
+  if (errorDom) {
+    errorDom.textContent = message;
+  } else {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('error');
+    wrapper.textContent = message;
+    document.querySelector('footer').append(wrapper);
+  }
+}
 
 function renderElement(elem) {
   const record = document.createElement('div');
@@ -198,6 +214,7 @@ function update() {
 }
 
 buttonAdd.addEventListener('click', () => {
+  let message = '';
   try {
     const nElem1 = prep(inputElem1.value);
     const nElem2 = prep(inputElem2.value);
@@ -221,7 +238,10 @@ buttonAdd.addEventListener('click', () => {
         .join(' + ')}`
     );
   } catch (error) {
+    message = error.message;
     console.error(error.message);
+  } finally {
+    error(message);
   }
 });
 
@@ -231,8 +251,8 @@ function check(node, exitNode) {
   return check(node.parentNode);
 }
 
-listsDom.addEventListener('contextmenu', (event) => event.preventDefault());
-listsDom.addEventListener('mouseup', (e) => {
+main.addEventListener('contextmenu', (e) => e.preventDefault());
+main.addEventListener('mouseup', (e) => {
   const record = check(e.target, e.currentTarget);
   if (!record) return;
   if (e.button === 0) {
