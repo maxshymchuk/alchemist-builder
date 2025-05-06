@@ -1,6 +1,7 @@
 const ERRORS = {
   NotEmpty: 'Cannot be empty',
   NotEqual: 'Cannot be equal',
+  AlreadyExists: 'Already exists',
 };
 
 String.prototype.hash = function () {
@@ -113,6 +114,11 @@ class ElementCollection {
     return Object.values(this._elements);
   }
 
+  has(name) {
+    const _name = prep(name);
+    return this._names.has(_name);
+  }
+
   add(name, parents) {
     const _name = prep(name);
     const _id = _name.hash();
@@ -200,6 +206,7 @@ buttonAdd.addEventListener('click', () => {
     if (!nElem1) throw new Error(ERRORS.NotEmpty);
     if (!nElem2) throw new Error(ERRORS.NotEmpty);
     if (!nResult) throw new Error(ERRORS.NotEmpty);
+    if (list.has(nResult)) throw new Error(ERRORS.AlreadyExists);
     if (nElem1 === nElem2) throw new Error(ERRORS.NotEqual);
 
     const elem1 = list.add(nElem1);
