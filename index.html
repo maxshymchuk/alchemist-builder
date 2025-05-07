@@ -31,9 +31,16 @@
             --fs-big: 18px;
         }
 
+        @media (max-width: 400px) {
+            :root {
+                --unit: 5px;
+            }
+        }
+
         * {
             box-sizing: border-box;
-            font-family: Consolas;
+            font-family: "Courier New";
+            font-weight: normal;
         }
 
         *:focus {
@@ -47,10 +54,11 @@
 
         html, body {
             margin: 0;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
             font-size: var(--fs);
             color: var(--text);
+            touch-action: pan-x pan-y;
         }
 
         body {
@@ -62,6 +70,12 @@
             padding: var(--unit);
             background-color: var(--input-bg);
             font-size: var(--fs);
+            color: var(--text);
+            border-radius: 0;
+        }
+
+        input:disabled, button:disabled {
+            color: var(--text-muted);
         }
 
         input[type="text"] {
@@ -72,7 +86,7 @@
         input[type="button"],
         button {
             border: var(--border-width) var(--border-style) var(--border-color);
-            font-weight: 600;
+            font-weight: bolder;
             cursor: pointer;
         }
 
@@ -87,39 +101,42 @@
             padding: var(--gap);
         }
 
-        main details:nth-child(-n + 2) {
+        main .list-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            height: 100%;
+        }
+
+        main .list-wrapper:nth-child(-n + 2) {
             grid-column: span var(--columns);
         }
 
-        main details {
+        main .list-wrapper details summary {
+            user-select: none;
+            font-weight: bolder;
+            padding: var(--unit) var(--gap);
+            cursor: pointer;
+            background-color: var(--input-bg);
             border: var(--border-width) var(--border-style) var(--border-color);
-            overflow-y: hidden;
         }
 
-        main details > div:empty::before {
+        main .list-wrapper details[open] + .list {
+            display: block;
+        }
+
+        main .list-wrapper .list {
+            display: none;
+            overflow-y: auto;
+            border: var(--border-width) var(--border-style) var(--border-color);
+            border-top: none;
+        }
+
+        main .list-wrapper .list:empty::before {
             display: block;
             content: "Empty";
             color: var(--text-muted);
             padding: var(--unit) var(--gap);
-        }
-
-        main details[open] {
-            overflow-y: auto;
-            height: 100%;
-        }
-
-        main details[open] summary {
-            border-bottom: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        main details summary {
-            user-select: none;
-            font-weight: 600;
-            padding: var(--unit) var(--gap);
-            cursor: pointer;
-            position: sticky;
-            top: 0;
-            background-color: var(--input-bg);
         }
 
         .record {
@@ -132,7 +149,7 @@
 
         .record-description {
             font-size: var(--fs-small);
-            font-weight: 300;
+            font-weight: lighter;
         }
 
         header {
@@ -147,18 +164,20 @@
         footer {
             display: grid;
             grid-template-columns: repeat(3, minmax(100px, auto) min-content);
-            gap: var(--unit) var(--gap);
+            gap: var(--unit);
             align-items: center;
+            align-content: center;
             padding: var(--gap);
             border-top: var(--border-width) var(--border-style) var(--border-color);
-            font-weight: 600;
+            font-weight: bolder;
             font-size: var(--fs-big);
+            overflow: auto hidden;
         }
 
         footer .error {
             grid-column: span 6;
             color: red;
-            font-weight: 300;
+            font-weight: lighter;
             font-size: var(--fs-small);
         }
     </style>
@@ -173,26 +192,36 @@
         <input id="debug-add-10" type="button" value="Add 10 records" />
     </header>
     <main id="lists">
-        <details>
-            <summary>All</summary>
-            <div id="list-all"></div>
-        </details>
-        <details>
-            <summary>Used</summary>
-            <div id="list-used"></div>
-        </details>
-        <details open>
-            <summary>Base</summary>
-            <div id="list-base"></div>
-        </details>
-        <details open>
-            <summary>Missed</summary>
-            <div id="list-missed"></div>
-        </details>
-        <details open>
-            <summary>Final</summary>
-            <div id="list-final"></div>
-        </details>
+        <div class="list-wrapper">
+            <details>
+                <summary>All</summary>
+            </details>
+            <div id="list-all" class="list"></div>
+        </div>
+        <div class="list-wrapper">
+            <details>
+                <summary>Used</summary>
+            </details>
+            <div id="list-used" class="list"></div>
+        </div>
+        <div class="list-wrapper">
+            <details open>
+                <summary>Base</summary>
+            </details>
+            <div id="list-base" class="list"></div>
+        </div>
+        <div class="list-wrapper">
+            <details open>
+                <summary>Missed</summary>
+            </details>
+            <div id="list-missed" class="list"></div>
+        </div>
+        <div class="list-wrapper">
+            <details open>
+                <summary>Final</summary>
+            </details>
+            <div id="list-final" class="list"></div>
+        </div>
     </main>
     <footer>
         <input id="elem1" type="text" />
