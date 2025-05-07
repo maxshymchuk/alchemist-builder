@@ -1,0 +1,16 @@
+{
+  "name": "alchemist-builder",
+  "version": "1.0.0",
+  "description": "Application to create combinations of two elements in user-friendly way",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

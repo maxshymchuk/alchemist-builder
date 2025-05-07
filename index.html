@@ -23,6 +23,9 @@
             --bg: #fff;
             --bg-hover: #f3f3f3;
 
+            --text: #000;
+            --text-muted: #888;
+
             --fs: 14px;
             --fs-small: 11px;
             --fs-big: 18px;
@@ -38,16 +41,21 @@
             outline-offset: var(--outline-offset)
         }
 
+        .hidden {
+            display: none;
+        }
+
         html, body {
             margin: 0;
             height: 100vh;
             overflow: hidden;
             font-size: var(--fs);
+            color: var(--text);
         }
 
         body {
-            display: grid;
-            grid-template-rows: auto 1fr auto;
+            display: flex;
+            flex-direction: column;
         }
 
         input, button {
@@ -69,6 +77,7 @@
         }
 
         main {
+            height: 100%;
             display: grid;
             overflow: hidden;
             grid-template: auto / repeat(var(--columns), minmax(auto, 1fr));
@@ -85,6 +94,13 @@
         main details {
             border: var(--border-width) var(--border-style) var(--border-color);
             overflow-y: hidden;
+        }
+
+        main details > div:empty::before {
+            display: block;
+            content: "Empty";
+            color: var(--text-muted);
+            padding: var(--unit) var(--gap);
         }
 
         main details[open] {
@@ -125,7 +141,6 @@
             grid-auto-flow: column;
             gap: var(--gap);
             padding: var(--gap);
-            margin-bottom: auto;
             border-bottom: var(--border-width) var(--border-style) var(--border-color);
         }
 
@@ -135,7 +150,6 @@
             gap: var(--unit) var(--gap);
             align-items: center;
             padding: var(--gap);
-            margin-top: auto;
             border-top: var(--border-width) var(--border-style) var(--border-color);
             font-weight: 600;
             font-size: var(--fs-big);
@@ -151,8 +165,12 @@
 </head>
 <body>
     <header>
+        <input id="debug-toggle" type="button" value="Show DBG" />
         <input id="import" type="button" value="Import" disabled />
         <input id="export" type="button" value="Export" disabled />
+    </header>
+    <header id="debug-header" class="hidden">
+        <input id="debug-add-10" type="button" value="Add 10 records" />
     </header>
     <main id="lists">
         <details>
@@ -184,6 +202,6 @@
         <input id="res" type="text" /> 
         <input id="add" type="button" value="Add" />
     </footer>
-    <script src="./script.js"></script>
+    <script type="module" src="./src/index.ts"></script>
 </body>
 </html>
