@@ -163,15 +163,13 @@
 
         footer {
             display: grid;
-            grid-template-columns: repeat(3, minmax(100px, auto) min-content);
+            grid-template-columns: repeat(3, minmax(50px, auto) min-content);
             gap: var(--unit);
             align-items: center;
-            align-content: center;
             padding: var(--gap);
             border-top: var(--border-width) var(--border-style) var(--border-color);
             font-weight: bolder;
             font-size: var(--fs-big);
-            overflow: auto hidden;
         }
 
         footer .error {
@@ -185,11 +183,12 @@
 <body>
     <header>
         <input id="debug-toggle" type="button" value="Show DBG" />
-        <input id="import" type="button" value="Import" disabled />
-        <input id="export" type="button" value="Export" disabled />
+        <!-- <input id="import" type="button" value="Import" disabled />
+        <input id="export" type="button" value="Export" disabled /> -->
     </header>
     <header id="debug-header" class="hidden">
-        <input id="debug-add-10" type="button" value="Add 10 records" />
+        <input id="debug-add-1" type="button" value="Add 1 record" />
+        <input id="debug-add-100" type="button" value="Add 100 records" />
     </header>
     <main id="lists">
         <div class="list-wrapper">

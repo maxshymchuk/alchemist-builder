@@ -4,7 +4,7 @@ import {
   handleDebugHeader,
   handleInit,
   handleMouseUp,
-  handleAdd10Records,
+  handleAddRecords,
 } from './handlers';
 import { DOMS } from './constants';
 
@@ -16,4 +16,5 @@ DOMS.Main?.addEventListener('mouseup', handleMouseUp);
 DOMS.ButtonAdd?.addEventListener('click', handleAdd);
 
 DOMS.DebugToggle?.addEventListener('click', handleDebugHeader);
-DOMS.DebugAdd10Records?.addEventListener('click', handleAdd10Records);
+DOMS.DebugAdd1Record?.addEventListener('click', handleAddRecords(1));
+DOMS.DebugAdd100Records?.addEventListener('click', handleAddRecords(100));

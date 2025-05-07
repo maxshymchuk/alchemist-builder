@@ -51,8 +51,11 @@ const DOMS = {
   get DebugHeader() {
     return document.getElementById('debug-header');
   },
-  get DebugAdd10Records() {
-    return document.getElementById('debug-add-10') as HTMLInputElement;
+  get DebugAdd1Record() {
+    return document.getElementById('debug-add-1') as HTMLInputElement;
+  },
+  get DebugAdd100Records() {
+    return document.getElementById('debug-add-100') as HTMLInputElement;
   },
 };
 

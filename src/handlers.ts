@@ -117,11 +117,13 @@ function handleDebugHeader() {
   }
 }
 
-function handleAdd10Records() {
-  for (const name of getRandomNames(10)) {
-    list.add(name);
-  }
-  display();
+function handleAddRecords(amount: number) {
+  return () => {
+    for (const name of getRandomNames(amount)) {
+      list.add(name);
+    }
+    display();
+  };
 }
 
 function handleInit() {
@@ -133,6 +135,6 @@ export {
   handleContextMenu,
   handleMouseUp,
   handleDebugHeader,
-  handleAdd10Records,
+  handleAddRecords,
   handleInit,
 };
