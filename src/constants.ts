@@ -39,23 +39,22 @@ const DOMS = {
     return document.getElementById('res') as HTMLInputElement;
   },
   get ButtonAdd() {
-    return document.getElementById('add');
+    return document.getElementById('add') as HTMLInputElement;
+  },
+  get Header() {
+    return document.querySelector('header');
   },
   get Footer() {
     return document.querySelector('footer');
   },
   // Debug
-  get DebugToggle() {
-    return document.getElementById('debug-toggle') as HTMLInputElement;
+  get DebugElements() {
+    return document.querySelectorAll('.debug');
   },
-  get DebugHeader() {
-    return document.getElementById('debug-header');
-  },
-  get DebugAdd1Record() {
-    return document.getElementById('debug-add-1') as HTMLInputElement;
-  },
-  get DebugAdd100Records() {
-    return document.getElementById('debug-add-100') as HTMLInputElement;
+  get DebugAddRecords() {
+    return document.querySelectorAll(
+      '[data-type="add-records"]'
+    ) as NodeListOf<HTMLInputElement>;
   },
 };
 

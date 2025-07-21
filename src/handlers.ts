@@ -107,16 +107,6 @@ function handleMouseUp(e: MouseEvent) {
   }
 }
 
-function handleDebugHeader() {
-  if (DOMS.DebugHeader?.classList.contains('hidden')) {
-    DOMS.DebugHeader?.classList.remove('hidden');
-    DOMS.DebugToggle.value = 'Hide DBG';
-  } else {
-    DOMS.DebugHeader?.classList.add('hidden');
-    DOMS.DebugToggle.value = 'Show DBG';
-  }
-}
-
 function handleAddRecords(amount: number) {
   return () => {
     for (const name of getRandomNames(amount)) {
@@ -127,6 +117,13 @@ function handleAddRecords(amount: number) {
 }
 
 function handleInit() {
+  DOMS.DebugElements.forEach((element) => {
+    if (import.meta.env.PROD) {
+      element.classList.add('hidden');
+    } else {
+      element.classList.remove('hidden');
+    }
+  });
   display();
 }
 
@@ -134,7 +131,6 @@ export {
   handleAdd,
   handleContextMenu,
   handleMouseUp,
-  handleDebugHeader,
   handleAddRecords,
   handleInit,
 };

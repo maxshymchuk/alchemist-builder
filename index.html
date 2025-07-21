@@ -49,7 +49,7 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         html, body {
@@ -160,6 +160,10 @@
             border-bottom: var(--border-width) var(--border-style) var(--border-color);
         }
 
+        header:empty, header:not(:has(:not(.hidden))) {
+            display: none;
+        }
+
         footer {
             display: grid;
             grid-template-columns: repeat(3, minmax(50px, auto) min-content);
@@ -181,14 +185,9 @@
 </head>
 <body>
     <header>
-        <input id="debug-toggle" type="button" value="Show DBG" />
-        <!-- <input id="import" type="button" value="Import" disabled />
-        <input id="export" type="button" value="Export" disabled /> -->
-    </header>
-    <header id="debug-header" class="hidden">
-        <input id="debug-add-1" type="button" value="Add 1 record" />
-        <input id="debug-add-100" type="button" value="Add 100 records" />
-    </header>
+        <input type="button" class="debug hidden" data-type="add-records" data-amount="1" />
+        <input type="button" class="debug hidden" data-type="add-records" data-amount="10" />
+    </header> 
     <main id="lists">
         <div class="list-wrapper">
             <details>

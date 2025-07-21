@@ -1,7 +1,6 @@
 import {
   handleAdd,
   handleContextMenu,
-  handleDebugHeader,
   handleInit,
   handleMouseUp,
   handleAddRecords,
@@ -15,6 +14,8 @@ DOMS.Main?.addEventListener('mouseup', handleMouseUp);
 
 DOMS.ButtonAdd?.addEventListener('click', handleAdd);
 
-DOMS.DebugToggle?.addEventListener('click', handleDebugHeader);
-DOMS.DebugAdd1Record?.addEventListener('click', handleAddRecords(1));
-DOMS.DebugAdd100Records?.addEventListener('click', handleAddRecords(100));
+DOMS.DebugAddRecords?.forEach((button) => {
+  const amount = Number(button.dataset.amount) || 0;
+  button.value = `Add ${amount} record${amount > 1 ? 's' : ''}`;
+  button.addEventListener('click', handleAddRecords(amount));
+});
